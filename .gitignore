@@ -41,7 +41,6 @@ coverage/
 *.so
 
 # Ignore Asterisk specific files
-*.conf
 *.astdb
 *.cdr
 *.call
