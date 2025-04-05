@@ -1,9 +1,9 @@
-# 📞 Asterisk IVR Telecom Project
+# 📞 Asterisk IVR Telecom
+![Alt Text](https://github.com/azilRababe/asterisk-ivr-telecom/blob/main/asterisk_ivr.png)
 
 An Interactive Voice Response (IVR) system built with Asterisk to simulate a real-world telecom operator’s voice server, allowing users to:
 
 - Check their balance in real-time
-- Leave voicemail messages sent via email
 - Navigate through an interactive voice menu (DTMF)
 - Listen to on-hold music while being processed
 
@@ -12,7 +12,6 @@ An Interactive Voice Response (IVR) system built with Asterisk to simulate a rea
 ## 🎯 Project Objectives
 
 - ☎️ Build a real-time **Interactive Voice Response (IVR)** system
-- 📩 Enable **Voicemail-to-Email with audio attachment (.wav)**
 - 🎶 Configure **Music-on-Hold**
 - 🗂️ Implement **DTMF Authentication** (phone number + PIN code)
 - 💸 Fetch and announce **real-time balance using TTS (Text to Speech)**
@@ -45,7 +44,6 @@ An Interactive Voice Response (IVR) system built with Asterisk to simulate a rea
 3. ✅ User is authenticated via a MySQL database.
 4. 💰 Balance is fetched and read aloud using **TTS**.
 5. 🎶 Music plays during wait time.
-6. 📬 If user leaves a message, a **voicemail email is sent with a `.wav` attachment**.
 
 ---
 
@@ -53,26 +51,32 @@ An Interactive Voice Response (IVR) system built with Asterisk to simulate a rea
 
 ### Install Asterisk
 
+For detailed installation instructions, please refer to the official Asterisk website:  
+[Asterisk Installation Guide](https://wiki.asterisk.org/wiki/display/AST/Installing+Asterisk)
+
+To install Asterisk on your system, run the following command:
+
 ```bash
 sudo apt update && sudo apt install asterisk
 ```
 
 ### Add Your SIP Users
-
-Edit `pjsip.conf` under `asterisk-configs/`.
+Edit `pjsip.conf` under `asterisk-configs/`
 
 ### Configure Extensions
-
-Copy `extensions.conf` into `/etc/asterisk/` and reload:
-
+Copy `extensions.conf` into `/etc/asterisk/` and reload Asterisk:
 ```bash
 sudo asterisk -rx "dialplan reload"
 ```
 
-### Setup MySQL Database
+## Setup MySQL Database
+For MySQL installation and setup, please follow the official MySQL documentation:
+`MySQL Installation Guide`
+
+Once MySQL is installed, run the following command to access the MySQL shell:
 
 ```bash
-mysql -u root -p < sql/create_tables.sql
+mysql -u root -p 
 ```
 
 ### Test Call
