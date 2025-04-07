@@ -83,6 +83,18 @@ mysql -u root -p
 
 Dial from SIP softphone (Zoiper, Linphone...) to your Asterisk server.
 
+## 📁 Important Paths and Resources
+
+- `sudo nano /etc/odbc.ini` – MySQL connection configuration
+- `sudo nano /etc/asterisk/res_odbc.conf` – `[asterisk]` MySQL connection settings
+- `/var/lib/asterisk/agi-bin/` – Directory for AGI scripts
+- `/var/lib/asterisk/sounds/` – Directory for sound files
+- `/var/lib/asterisk/agi-bin/check_balance.py` – AGI script for balance checking
+- `nano /etc/asterisk` – Asterisk configuration files
+- `/usr/src/asterisk/asterisk-22.2.0` – Asterisk source code
+- [Asterisk Google TTS](https://github.com/zaf/asterisk-googletts) – Google TTS integration
+- `/var/log/asterisk/cdr-csv/Master.csv` – Call Detail Record (CDR) logs
+
 ## 📂 License
 
 MIT License – free to use and modify.
