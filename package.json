@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "jssip": "^3.10.1"
   }
 }

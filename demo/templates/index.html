@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IVR Test Call</title>
+    <script src="/static/jssip.min.js"></script>
+  </head>
+  <body>
+    <h2>Click to call IVR (Extension 115)</h2>
+    <button onclick="makeCall()">Call IVR</button>
+
+    <audio id="remoteAudio" autoplay></audio>
+
+    <script>
+      const socket = new JsSIP.WebSocketInterface("wss://192.168.0.0:8089/ws");
+
+      const configuration = {
+        sockets: [socket],
+        uri: "sip:webrtc_client@192.168.0.0",
+        password: "", // Replace with your SIP password
+        register: true,
+      };
+
+      const ua = new JsSIP.UA(configuration);
+
+      ua.start();
+
+      ua.on("connected", () => {
+        console.log("Connected to Asterisk via WebSocket!");
+      });
+
+      ua.on("registered", () => {
+        console.log("SIP Registered.");
+      });
+
+      ua.on("registrationFailed", (e) => {
+        console.error("Registration failed", e);
+      });
+
+      ua.on("newRTCSession", function (data) {
+        const newSession = data.session;
+
+        newSession.on("peerconnection", function (e) {
+          e.peerconnection.addEventListener("track", function (event) {
+            if (event.track.kind === "audio") {
+              const remoteAudio = document.getElementById("remoteAudio");
+              remoteAudio.srcObject = event.streams[0];
+            }
+          });
+        });
+
+        newSession.on("failed", function (e) {
+          console.error("Call failed: ", e.cause);
+        });
+
+        newSession.on("ended", function (e) {
+          console.log("Call ended: ", e.cause);
+        });
+
+        newSession.on("confirmed", function () {
+          console.log("Call confirmed");
+        });
+      });
+
+      function makeCall() {
+        const eventHandlers = {
+          progress: function () {
+            console.log("Call is in progress...");
+          },
+          failed: function (e) {
+            console.log("Call failed with cause: " + e.cause);
+          },
+          ended: function (e) {
+            console.log("Call ended with cause: " + e.cause);
+          },
+          confirmed: function () {
+            console.log("Call confirmed");
+          },
+        };
+
+        const options = {
+          eventHandlers: eventHandlers,
+          mediaConstraints: { audio: true, video: false },
+          rtcOfferConstraints: {
+            offerToReceiveAudio: 1,
+            offerToReceiveVideo: 0,
+          },
+        };
+
+        ua.call("sip:115@192.168.0.0", options);
+      }
+    </script>
+  </body>
+</html>
