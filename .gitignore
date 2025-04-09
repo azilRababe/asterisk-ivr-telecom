@@ -13,17 +13,19 @@ yarn-error.log*
 .env.local
 .env.*.local
 
-# Ignore build output
+# Ignore build artifacts
 dist/
 build/
+out/
 
 # Ignore temporary files
 *.tmp
+*.temp
 *.swp
 *.swo
 *.bak
 
-# Ignore IDE specific files
+# Ignore IDE and editor specific files
 .vscode/
 .idea/
 *.iml
@@ -34,13 +36,20 @@ Thumbs.db
 
 # Ignore coverage reports
 coverage/
+*.lcov
 
 # Ignore compiled files
-*.out
+*.class
 *.o
 *.so
+*.dll
+*.exe
 
 # Ignore Asterisk specific files
 *.astdb
-*.cdr
-*.call
+*.conf~
+*.core
+
+# Ignore Python specific files
+.venv/
+venv/
